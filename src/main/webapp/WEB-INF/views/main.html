@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div>
+    <form th:action="@{/logout}" method="post">
+      <input type="submit" value="Выйти"/>
+    </form>
+  </div>
+  <div>
+    <form method="post">
+      <input type="text" name="model" placeholder="Введите марку автомобиля" />
+      <input type="text" name="number" placeholder="Введите номер автомобиля"/>
+      <input type="text" name="owner" placeholder="Введите имя владельца"/>
+      <button type="submit">Добавить</button>
+    </form>
+  </div>
+  <div>Список машин</div>
+  <div>
+    <ul th:each="car:${cars}" style="display: flex">
+      <li>
+        <b th:text="${car.id}"/>
+        <b th:text="${car.model}"/>
+        <b th:text="${car.number}"/>
+        <b th:text="${car.owner}"/>
+      </li>
+      <button type="button" th:onclick="|window.location.href='http://localhost:8080/info/' + ${car.id}|">Подробнее</button>
+    </ul>
+  </div>
+</body>
+</html>

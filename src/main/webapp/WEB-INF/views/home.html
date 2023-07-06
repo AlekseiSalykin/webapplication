@@ -1,10 +1,63 @@
 <!DOCTYPE HTML>
 <html  xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Getting Started: Serving Web Content</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <title>Home Page</title>
+  <script type="text/javascript" src="/js/jquery-3.6.0.js"></script>
 </head>
 <body>
-  Hello, world!
+<div>
+  <h1>ГЛАВНАЯ СТРАНИЦА</h1>
+
+  <table id="entities_table" class="w3-table w3-striped w3-bordered w3-hoverable">
+    <tr>
+      <button type="submit" th:onclick="|window.location.href='/ui/car/list'|">Машинки</button>
+      <button type="submit" th:onclick="|window.location.href='/ui/user/list'|">Юзеры</button>
+      <button type="submit" th:onclick="|window.location.href='/ui/role/list'|">Роли</button>
+    </tr>
+  </table>
+<!--  <script type="text/javascript">-->
+<!--    function ajaxGet() {-->
+<!--      $.getJSON('/home', function (json) {-->
+<!--        console.log(json);-->
+<!--        let carList = "Car List";-->
+<!--        let userList = "User List";-->
+<!--        let roleList = "Role List";-->
+<!--        var tr = [];-->
+
+<!--        tr.push('<tr>');-->
+<!--        tr.push('<td><button type="submit" onclick="location.href=\'/ui/car/list\'">' + carList + '</button></td>')-->
+<!--        tr.push('<td><button type="submit" onclick="location.href=\'/ui/user/list\'">' + userList + '</button></td>')-->
+<!--        tr.push('<td><button type="submit" onclick="location.href=\'/ui/role/list\'">' + roleList + '</button></td>')-->
+
+<!--        $('#entities_table').append($(tr.join('')));-->
+<!--      });-->
+<!--    }-->
+
+<!--    $(document).delegate('#btnLogout', 'click', function (event) {-->
+<!--      event.preventDefault();-->
+
+<!--      $.ajax({-->
+<!--        type: "GET",-->
+<!--        url: '/logout',-->
+<!--        success: function (result) {-->
+<!--          location.href = "/auth/login";-->
+<!--          window.setTimeout(function () {-->
+<!--            location.reload();-->
+<!--          }, 1000);-->
+<!--        },-->
+<!--        error: function (err) {-->
+<!--          alert('LOGOUT ERROR!');-->
+<!--        }-->
+<!--      });-->
+<!--    });-->
+
+
+<!--    $(document).ready(function () {-->
+<!--      ajaxGet();-->
+<!--    });-->
+<!--  </script>-->
+</div>
 </body>
 </html>

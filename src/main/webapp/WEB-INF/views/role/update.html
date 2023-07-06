@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <title>Update User</title>
+    <title>Update Role</title>
     <script type="text/javascript" src="/js/jquery-3.6.0.js"></script>
 </head>
 <body>
 <div class="w3-container">
 
-    <p id="userId" hidden><span th:text="${id}"/></p>
+    <p id="roleId" hidden><span th:text="${id}"/></p>
 
     <div class="w3-container w3-bar w3-blue">
-        <span class="w3-bar-item" style="padding-left:1px"><b>Update User</b></span>
+        <span class="w3-bar-item" style="padding-left:1px"><b>Update Role</b></span>
 
         <span class="w3-bar-item w3-button" style="float: right;">
             <img th:src="@{/images/icon_logout.jpg}"
@@ -38,19 +38,11 @@
         </tr>
         <tr>
             <td>Id</td>
-            <td><label id="user_id" name="user_id_name"></label></td>
+            <td><label id="role_id" name="role_id_name"></label></td>
         </tr>
         <tr>
-            <td>Name</td>
-            <td><input id="user_name" name="user_name_name" type="text"></td>
-        </tr>
-        <tr>
-            <td>Login</td>
-            <td><input id="user_login" name="user_name_name" type="text"></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input id="user_password" name="user_password_name" type="password"></td>
+            <td>Role</td>
+            <td><input id="role_role" name="role_role_name" type="text"></td>
         </tr>
     </table>
 
@@ -73,39 +65,33 @@
             }
         });
 
-        function UserDTO(id,name,login,password){
+        function RoleDTO(id,role){
             this.id = id;
-            this.name = name;
-            this.login = login;
-            this.password = password;
+            this.role = role;
         }
 
         $(document).delegate('#btnSave','click',function(event){
             event.preventDefault();
 
-            var userId = $('#userId').text();
+            var roleId = $('#roleId').text();
 
-            var id = userId;
-            var name = $('#user_name').val();
-            var login = $('#user_login').val();
-            var password = $('#user_password').val();
+            var id = roleId;
+            var role = $('#role_role').val();
 
-            var userDTO = new UserDTO(id,name,login,password);
+            var roleDTO = new RoleDTO(id,role);
 
-            console.log(userId);
+            console.log(roleId);
             console.log(id);
-            console.log(name);
-            console.log(login)
-            console.log(password);
-            console.log(userDTO);
-            console.log(JSON.stringify(userDTO));
+            console.log(role);
+            console.log(roleDTO);
+            console.log(JSON.stringify(roleDTO));
 
             $.ajax({
                 type: "PUT",
-                url: '/user',
-                data: JSON.stringify(userDTO),
+                url: '/role',
+                data: JSON.stringify(roleDTO),
                 success: function(result){
-                    location.href="/ui/user/read/" + userId;
+                    location.href="/ui/role/read/" + roleId;
                     window.setTimeout(function(){
                         location.reload();
                     }, 1000);
@@ -119,9 +105,9 @@
 
         $(document).delegate('#btnGoToRead','click',function(result){
 
-            var userId = $('#userId').text();
+            var roleId = $('#roleId').text();
 
-            location.href="/ui/user/read/" + userId;
+            location.href="/ui/role/read/" + roleId;
             window.setTimeout(function(){
                 location.reload();
             }, 1000);
@@ -130,16 +116,14 @@
 
         function ajaxGet(){
 
-            var userId = $('#userId').text();
+            var roleId = $('#roleId').text();
 
-            $.getJSON('/user/' + userId, function(json){
+            $.getJSON('/role/' + roleId, function(json){
 
                 console.log(json);
 
-                $('#user_id').text(json.id);
-                $('#user_name').val(json.name);
-                $('#user_login').val(json.login)
-                $('#user_password').val(json.password);
+                $('#role_id').text(json.id);
+                $('#role_role').val(json.role);
 
             });
         }

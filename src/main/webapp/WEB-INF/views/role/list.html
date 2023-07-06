@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <title>List Users</title>
+    <title>List Roles</title>
     <script type="text/javascript" src="/js/jquery-3.6.0.js"></script>
 </head>
 <body>
@@ -11,9 +11,9 @@
 
     <div class="w3-container w3-bar w3-blue">
 
-        <span class="w3-bar-item" style="padding-left:1px"><b>Users List</b></span>
+        <span class="w3-bar-item" style="padding-left:1px"><b>Roles List</b></span>
 
-        <a href="/ui/user/create" class="w3-bar-item w3-button" style="float: right;">
+        <a href="/ui/role/create" class="w3-bar-item w3-button" style="float: right;">
             <img th:src="@{/images/icon_create.gif}"
                  alt="create"
                  style="width:27px;height:27px;"
@@ -40,25 +40,21 @@
     <table id="entities_table" class="w3-table w3-striped w3-bordered w3-hoverable">
         <tr>
             <th>Id</th>
-            <th>Name</th>
-            <th>Login</th>
-            <th>Password</th>
+            <th>Role</th>
         </tr>
     </table>
     <script type="text/javascript">
 
         function ajaxGet() {
-            $.getJSON('/user', function (json) {
+            $.getJSON('/role', function (json) {
                 console.log(json);
                 let descr = "Подробнее";
                 var tr = [];
                 for (var i = 0; i < json.length; i++) {
                     tr.push('<tr>');
-                    tr.push('<td><a id=' + json[i].id + ' href="/ui/user/read/' + json[i].id + '">' + json[i].id + '</a></td>');
-                    tr.push('<td>' + json[i].name + '</td>');
-                    tr.push('<td>' + json[i].login + '</td>');
-                    tr.push('<td>' + json[i].password + '</td>');
-                    tr.push('<td><button type="submit" onclick="location.href=\'/ui/user/read/' + json[i].id + '\'\">' + descr + '</button></td>')
+                    tr.push('<td><a id=' + json[i].id + ' href="/ui/role/read/' + json[i].id + '">' + json[i].id + '</a></td>');
+                    tr.push('<td>' + json[i].role + '</td>');
+                    tr.push('<td><button type="submit" onclick="location.href=\'/ui/role/read/' + json[i].id + '\'\">' + descr + '</button></td>')
                 }
                 $('#entities_table').append($(tr.join('')));
             });

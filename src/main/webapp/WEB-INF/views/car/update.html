@@ -1,10 +1,164 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Update Car</title>
+    <script type="text/javascript" src="/js/jquery-3.6.0.js"></script>
 </head>
 <body>
+<div class="w3-container">
 
+    <p id="carId" hidden><span th:text="${id}"/></p>
+
+    <div class="w3-container w3-bar w3-blue">
+        <span class="w3-bar-item" style="padding-left:1px"><b>Update Car</b></span>
+
+        <span class="w3-bar-item w3-button" style="float: right;">
+            <img th:src="@{/images/icon_logout.jpg}"
+                 alt="Logout"
+                 style="width:27px;height:27px;"
+                 title="Logout"
+                 id="btnLogout">
+        </span>
+
+        <a href="/home" class="w3-bar-item w3-button" style="float: right;">
+            <img th:src="@{/images/icon_home.png}"
+                 alt="home"
+                 style="width:27px;height:27px;"
+                 title="home"></a>
+    </div>
+    <br>
+
+
+    <table id="update_entity_table" class="w3-table w3-bordered">
+        <tr>
+            <th>Property Name</th>
+            <th>Property Value</th>
+        </tr>
+        <tr>
+            <td>Id</td>
+            <td><label id="car_id" name="car_id_name"></label></td>
+        </tr>
+        <tr>
+            <td>Model</td>
+            <td><input id="car_model" name="car_model_name" type="text"></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td><input id="car_number" name="car_number_name" type="text"></td>
+        </tr>
+    </table>
+
+    <br>
+    <br>
+
+
+    <div class="container">
+        <button id="btnSave" class="btnSaveAuto">Save</button>
+        <button id="btnGoToRead" type="button">Cancel</button>
+    </div>
+
+    <script type="text/javascript">
+
+        $.ajaxSetup({
+            cache: false,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        });
+
+        function CarDTO(id,model,number){
+            this.id = id;
+            this.model = model;
+            this.number = number;
+        }
+
+        $(document).delegate('#btnSave','click',function(event){
+            event.preventDefault();
+
+            var carId = $('#carId').text();
+
+            var id = carId;
+            var model = $('#car_model').val();
+            var number = $('#car_number').val();
+
+            var carDTO = new CarDTO(id,model,number);
+
+            console.log(carId);
+            console.log(id);
+            console.log(model);
+            console.log(number);
+            console.log(carDTO);
+            console.log(JSON.stringify(carDTO));
+
+            $.ajax({
+                type: "PUT",
+                url: '/car',
+                data: JSON.stringify(carDTO),
+                success: function(result){
+                    location.href="/ui/car/read/" + carId;
+                    window.setTimeout(function(){
+                        location.reload();
+                    }, 1000);
+                },
+                error: function(err){
+                    alert('PUT REQUEST ERROR!');
+                }
+            });
+        });
+
+
+        $(document).delegate('#btnGoToRead','click',function(result){
+
+            var carId = $('#carId').text();
+
+            location.href="/ui/car/read/" + carId;
+            window.setTimeout(function(){
+                location.reload();
+            }, 1000);
+        });
+
+
+        function ajaxGet(){
+
+            var carId = $('#carId').text();
+
+            $.getJSON('/car/' + carId, function(json){
+
+                console.log(json);
+
+                $('#car_id').text(json.id);
+                $('#car_model').val(json.model);
+                $('#car_number').val(json.number);
+
+            });
+        }
+
+        $(document).delegate('#btnLogout','click',function(event){
+            event.preventDefault();
+
+            $.ajax({
+                type: "GET",
+                url: '/logout',
+                success: function(result){
+                    location.href="/auth/login";
+                    window.setTimeout(function(){
+                        location.reload();
+                    }, 1000);
+                },
+                error: function(err){
+                    alert('LOGOUT ERROR!');
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            ajaxGet();
+        });
+
+    </script>
+</div>
 </body>
 </html>

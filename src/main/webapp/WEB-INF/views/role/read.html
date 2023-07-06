@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <title>Car Read</title>
+    <title>Role Read</title>
     <script type="text/javascript" src="/js/jquery-3.6.0.js"></script>
 </head>
 <body>
@@ -11,9 +11,9 @@
     <p id="id" hidden><span th:text="${id}"/></p>
 
     <div class="w3-container w3-bar w3-blue">
-        <span class="w3-bar-item" style="padding-left:1px"><b>View Car</b></span>
+        <span class="w3-bar-item" style="padding-left:1px"><b>View Role</b></span>
 
-        <a th:href="@{'/ui/car/update/' + ${id}}" class="w3-bar-item w3-button" style="float: right;">
+        <a th:href="@{'/ui/role/update/' + ${id}}" class="w3-bar-item w3-button" style="float: right;">
             <img th:src="@{/images/icon_edit.gif}"
                  alt="modify"
                  style="width:27px;height:27px;"
@@ -54,7 +54,7 @@
     <br>
     <br>
 
-    <form action="/ui/car/list">
+    <form action="/ui/role/list">
         <input type="submit" value="Back"/>
     </form>
 
@@ -78,9 +78,9 @@
 
             $.ajax({
                 type: "DELETE",
-                url: '/car/' + id,
+                url: '/role/' + id,
                 success: function(result){
-                    location.href="/ui/car/list";
+                    location.href="/ui/role/list";
                     window.setTimeout(function(){
                         location.reload();
                     }, 1000);
@@ -95,7 +95,7 @@
 
             var id = $('#id').text();
 
-            $.getJSON('/car/' + id, function (json) {
+            $.getJSON('/role/' + id, function (json) {
                 console.log(json);
 
                 var tr = [];
@@ -106,13 +106,8 @@
                 tr.push('</tr>');
 
                 tr.push('<tr>');
-                tr.push('<td>Model</td>');
-                tr.push('<td>' + json.model + '</td>');
-                tr.push('</tr>');
-
-                tr.push('<tr>');
-                tr.push('<td>Number</td>');
-                tr.push('<td>' + json.number + '</td>');
+                tr.push('<td>Role</td>');
+                tr.push('<td>' + json.role + '</td>');
                 tr.push('</tr>');
 
                 $('#entity_table').append($(tr.join('')))

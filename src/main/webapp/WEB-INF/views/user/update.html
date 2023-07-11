@@ -42,15 +42,15 @@
         </tr>
         <tr>
             <td>Name</td>
+            <td><input id="user_name_name" name="user_name_name" type="text"></td>
+        </tr>
+        <tr>
+            <td>Username</td>
             <td><input id="user_name" name="user_name_name" type="text"></td>
         </tr>
         <tr>
-            <td>Login</td>
-            <td><input id="user_login" name="user_name_name" type="text"></td>
-        </tr>
-        <tr>
             <td>Password</td>
-            <td><input id="user_password" name="user_password_name" type="password"></td>
+            <td><input id="user_password" name="user_password_name" type="text"></td>
         </tr>
     </table>
 
@@ -86,8 +86,8 @@
             var userId = $('#userId').text();
 
             var id = userId;
-            var name = $('#user_name').val();
-            var login = $('#user_login').val();
+            var name = $('#user_name_name').val();
+            var login = $('#user_name').val();
             var password = $('#user_password').val();
 
             var userDTO = new UserDTO(id,name,login,password);
@@ -137,8 +137,8 @@
                 console.log(json);
 
                 $('#user_id').text(json.id);
-                $('#user_name').val(json.name);
-                $('#user_login').val(json.login)
+                $('#user_name_name').val(json.name);
+                $('#user_name').val(json.login)
                 $('#user_password').val(json.password);
 
             });

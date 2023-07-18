@@ -7,18 +7,20 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "usr_role")
-@NoArgsConstructor
+@Table(name = "document")
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @ToString
-public class UserRole {
+public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
-    @Column(name = "id_user")
-    private Long userId;
-    @Column(name = "id_role")
-    private Long roleId;
 
+    @Column(name = "id_model")
+    private Long modelId;
+
+    @Column(name = "number_car")
+    private String numberCar;
 }

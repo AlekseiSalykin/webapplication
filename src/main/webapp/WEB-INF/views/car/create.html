@@ -35,16 +35,16 @@
         </tr>
 
         <tr>
-            <td>Id</td>
-            <td><input id="id" name="car_id_name" type="text"></td>
+            <td>Model</td>
+            <td><input id="model" name="car_model_name" type="text"></td>
         </tr>
         <tr>
-            <td>Model</td>
-            <td><input id="car_model_name" name="car_model_name" type="text"></td>
+            <td>Owner</td>
+            <td><input id="owner" name="car_owner_name" type="text"></td>
         </tr>
         <tr>
             <td>Number</td>
-            <td><input id="car_number_name" name="car_number_name" type="text"></td>
+            <td><input id="number" name="car_number_name" type="text"></td>
         </tr>
     </table>
 
@@ -65,20 +65,20 @@
                 'Content-Type': 'application/json',
             }
         });
-        function CarDTO(id,model,number){
-            this.id = id;
-            this.model = model;
+        function CarDTO(modelId,userId,number){
+            this.modelId = modelId;
+            this.userId = userId;
             this.number = number;
         }
 
         $(document).delegate('#btnSave','click',function(event){
             event.preventDefault();
 
-            var id = $('#id').val();
-            var model = $('#car_model_name').val();
-            var number = $('#car_number_name').val();
+            var model = $('#model').val();
+            var owner = $('#owner').val();
+            var number = $('#number').val();
 
-            var carDTO = new CarDTO(id, model, number);
+            var carDTO = new CarDTO(model, owner, number);
 
             console.log(carDTO);
             console.log(JSON.stringify(carDTO));

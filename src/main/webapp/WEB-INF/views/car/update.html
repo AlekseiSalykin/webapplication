@@ -38,15 +38,19 @@
         </tr>
         <tr>
             <td>Id</td>
-            <td><label id="car_id" name="car_id_name"></label></td>
+            <td><label id="id" name="car_id_name"></label></td>
         </tr>
         <tr>
             <td>Model</td>
-            <td><input id="car_model" name="car_model_name" type="text"></td>
+            <td><input id="model" name="car_model_name" type="text"></td>
         </tr>
         <tr>
-            <td>Last Name</td>
-            <td><input id="car_number" name="car_number_name" type="text"></td>
+            <td>Owner</td>
+            <td><input id="owner" name="car_model_name" type="text"></td>
+        </tr>
+        <tr>
+            <td>Number</td>
+            <td><input id="number" name="car_number_name" type="text"></td>
         </tr>
     </table>
 
@@ -69,22 +73,23 @@
             }
         });
 
-        function CarDTO(id,model,number){
-            this.id = id;
-            this.model = model;
+        function CarDTO(modelId,userId,number){
+            this.modelId = modelId;
+            this.userId = userId;
             this.number = number;
         }
 
         $(document).delegate('#btnSave','click',function(event){
             event.preventDefault();
 
-            var carId = $('#carId').text();
+            var carId = $('#id').text();
 
             var id = carId;
-            var model = $('#car_model').val();
+            var model = $('#model').val();
+            var owner = $('#owner').val();
             var number = $('#car_number').val();
 
-            var carDTO = new CarDTO(id,model,number);
+            var carDTO = new CarDTO(model,owner,number);
 
             console.log(carId);
             console.log(id);
@@ -112,7 +117,7 @@
 
         $(document).delegate('#btnGoToRead','click',function(result){
 
-            var carId = $('#carId').text();
+            var carId = $('#id').text();
 
             location.href="/ui/car/read/" + carId;
             window.setTimeout(function(){
@@ -123,15 +128,16 @@
 
         function ajaxGet(){
 
-            var carId = $('#carId').text();
+            var carId = $('#id').text();
 
             $.getJSON('/car/' + carId, function(json){
 
                 console.log(json);
 
-                $('#car_id').text(json.id);
-                $('#car_model').val(json.model);
-                $('#car_number').val(json.number);
+                $('#id').text(json.id);
+                $('#model').val(json.modelId);
+                $('#owner').val(json.userId);
+                $('#number').val(json.number);
 
             });
         }

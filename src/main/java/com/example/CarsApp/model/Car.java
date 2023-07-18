@@ -16,10 +16,11 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "model")
-    private String model;
-    @Column(name = "number")
-    private int number;
-    @Column(name = "userId")
+    @Column(name = "id_model")
+    private Long modelId;
+    @Column(name = "id_user")
     private Long userId;
+    @Column(name = "number")
+    private String number;
+
 }

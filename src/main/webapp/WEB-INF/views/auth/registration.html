@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Registration Page</title>
+<!--    <script type="text/javascript" src="/js/jquery-3.6.0.js"></script>-->
 </head>
 <body>
+<div class="w3-container w3-bar w3-blue">
+    <span class="w3-bar-item" style="padding-left:1px"><b>Registration Page</b></span>
 
+    <a href="/home" class="w3-bar-item w3-button" style="float: right;">
+        <img th:src="@{/images/icon_home.png}"
+             alt="home"
+             style="width:27px;height:27px;"
+             title="home"></a>
+</div>
+<br>
+<!--/* Workaround for bug https://youtrack.jetbrains.com/issue/IDEA-132738 -->
+    <!--@thymesVar id="user" type="com.example.CarsApp.model.User"-->
+    <!--@thymesVar id="name" type="String"-->
+    <!--@thymesVar id="username" type="String"-->
+    <!--@thymesVar id="password" type="String"-->
+<!--*/-->
+<form name="f" th:action="@{/auth/process-registration}" th:method="POST" th:object="${user}" id="registration_page">
+    <label for="name"> Name : </label>
+    <input id="name" th:field="*{name}" type="text"/>
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+        Name error
+    </div>
+    <br><br>
+    <label for="username"> User Name : </label>
+    <input type="text" th:field="*{username}" id="username"/>
+    <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+        Username error
+    </div>
+    <br><br>
+    <label for="password"> Password:  </label>
+    <input type="password" th:field="*{password}" id="password"/>
+    <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+        Password error
+    </div>
+    <br><br>
+    <div><input type="submit" value="Register"/></div>
+</form>
 </body>
 </html>

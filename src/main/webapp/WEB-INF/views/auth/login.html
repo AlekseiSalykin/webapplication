@@ -4,14 +4,20 @@
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Login Page</title>
-    <script type="text/javascript" src="/js/jquery-3.6.0.js"></script>
+<!--    <script type="text/javascript" src="/js/jquery-3.6.0.js"></script>-->
 </head>
 <body>
     <div class="w3-container w3-bar w3-blue">
         <span class="w3-bar-item" style="padding-left:1px"><b>Login Page</b></span>
+
+        <a href="/auth/registration" class="w3-bar-item w3-button" style="float: right;">
+            <img th:src="@{/images/icon_registration.png}"
+                 alt="registration"
+                 style="width:27px;height:27px;"
+                 title="registration"></a>
     </div>
     <br>
-    <form action="/auth/login" method="post">
+    <form name="f" action="/process-login" method="post">
         <div><label for="username"> User Name : <input type="text" name="username" id="username"/> </label></div>
         <br>
         <div><label for="password"> Password: <input type="password" name="password" id="password"/> </label></div>

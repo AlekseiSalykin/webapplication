@@ -23,17 +23,19 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) -> authorize
+//                        .requestMatchers("/ui/**", "/", "/home", "/**").authenticated()
+                        .requestMatchers("/images/**", "/auth/registration").permitAll()
                         .anyRequest().authenticated()
-//                        .requestMatchers("/auth/login", "/auth/registration").permitAll()
                 )
                 .formLogin((form) -> form
                         .loginPage("/auth/login")
-                        .loginProcessingUrl("/auth/login")
-                        .defaultSuccessUrl("/")
+                        .loginProcessingUrl("/process-login")
+                        .defaultSuccessUrl("/home", true)
+                        .failureUrl("/auth/login?error")
                         .permitAll()
                 )
                 .logout((logout) -> logout
-//                        .logoutUrl("/logout").logoutSuccessUrl("/auth/login")
+                        .logoutUrl("/logout").logoutSuccessUrl("/auth/login")
                         .permitAll());
         return http.build();
     }

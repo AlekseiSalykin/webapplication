@@ -42,8 +42,8 @@
         <tr>
             <th>Id</th>
             <th>Model</th>
+            <th>Owner</th>
             <th>Number</th>
-            <th>User_id</th>
             <th>Description</th>
         </tr>
     </table>
@@ -57,9 +57,9 @@
                 for (var i = 0; i < json.length; i++) {
                     tr.push('<tr>');
                     tr.push('<td><a id=' + json[i].id + ' href="/ui/car/read/' + json[i].id + '">' + json[i].id + '</a></td>');
-                    tr.push('<td>' + json[i].model + '</td>');
+                    tr.push('<td>' + json[i].modelId + '</td>');
+                    tr.push('<td>' + json[i].userId + '</td>');
                     tr.push('<td>' + json[i].number + '</td>');
-                    tr.push('<td>' + json[i].user_id + '</td>');
                     tr.push('<td><button type="submit" onclick="location.href=\'/ui/car/read/' + json[i].id + '\'\">' + descr + '</button></td>')
                 }
                 $('#entities_table').append($(tr.join('')));
